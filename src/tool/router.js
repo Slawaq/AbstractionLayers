@@ -46,6 +46,10 @@ export default class Router {
     this.logger.error(`${path} handler has occurred an error!`, err)
   }
 
+  use (middleware) {
+    this.table.middleware = middleware
+  }
+
   get (path, handler) {
     this.table.get[path] = handler
     return this

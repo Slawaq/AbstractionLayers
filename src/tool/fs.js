@@ -1,18 +1,15 @@
 'use strict'
 
 import fs from 'fs'
+import Cache from './cache'
 
-export default class FileSystem {
-
-  constructor () {
-    this.cache = { }
-  }
+export default class FileSystem extends Cache {
 
   get (name) {
-    return this
-      .getCached(name)
+    return super
+      .get(name)
       .catch(_ => this.getForce(name))
-      .then(data => this.cache[name] = data)
+      .then(data => super.update(name, data))
   }
 
   getJSON (name) {
@@ -29,18 +26,9 @@ export default class FileSystem {
         : resolve(data)))
   }
 
-  getCached (name) {
-    return this.cache.hasOwnProperty(name)
-      ? Promise.resolve(this.cache[name])
-      : Promise.reject()
-  }
-
   update (name, data) {
-    let cacheUpdater = _ => this.cache[name] = data
-
-    return this
-      .getCached(name)
-      .then(cacheUpdater, cacheUpdater)
+    return super
+      .update(name, data)
       .then(_ => this.updateOnDisk(name, data))
   }
 
@@ -55,12 +43,6 @@ export default class FileSystem {
         err
         ? reject(err)
         : resolve(data)))
-  }
-
-  clear (name) {
-    return this
-      .getCached(name)
-      .then(_ => delete this.cache[name])
   }
 
 }

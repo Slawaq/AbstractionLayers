@@ -10,10 +10,10 @@
     },
     "templatePath": "templates/",
     "templates": {
-      "index": "index.jhtml",
-      "edit": "edit.jhtml",
+      "404": "server.404.jhtml",
       "500": "server.500.jhtml",
-      "404": "server.404.jhtml"
+      "index": "index.jhtml",
+      "edit": "edit.jhtml"
     }
   },
   "scripts": {
@@ -27,9 +27,10 @@
   "devDependencies": {
     "babel-cli": "*",
     "babel-eslint": "*",
+    "babel-plugin-syntax-async-generators": "^6.8.0",
+    "babel-plugin-transform-runtime": "*",
     "babel-preset-es2015": "*",
     "babel-preset-stage-0": "*",
-    "babel-plugin-transform-runtime": "*",
     "eslint": "*",
     "eslint-config-standard": "*",
     "eslint-plugin-promise": "*",
