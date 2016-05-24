@@ -4,7 +4,6 @@ import Router from './tool/router'
 import Templater from './tool/templater'
 import { parse as cookieParse, write as cookieWrite } from './tool/cookie'
 
-import loadTemplates from './loadTemplates'
 import handlers from './handlers/'
 
 export default logger => config => async fs => {
