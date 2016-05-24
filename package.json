@@ -11,6 +11,7 @@
     "templatePath": "templates/",
     "templates": {
       "index": "index.jhtml",
+      "edit": "edit.jhtml",
       "500": "server.500.jhtml",
       "404": "server.404.jhtml"
     }

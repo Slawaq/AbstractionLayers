@@ -58,7 +58,10 @@ export default class Router {
 
   enhanceResponse (res) {
     if (typeof this.enhancers.response === 'function') {
-      let enhances = this.enhancers.response(res)
+      let enhances = {
+        ...this.enhancers.response(res),
+        redirect: this.redirectEnhencer(res)
+      }
       Object
         .keys(enhances)
         .forEach(key => res[key] = enhances[key])
@@ -76,6 +79,14 @@ export default class Router {
     }
 
     return req
+  }
+
+  redirectEnhencer (response) {
+    return to => {
+      response.statusCode = 303
+      response.setHeader('Location', to)
+      response.end()
+    }
   }
 
 }

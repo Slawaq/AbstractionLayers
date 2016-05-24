@@ -3,7 +3,7 @@
 import Router from './tool/router'
 import Templater from './tool/templater'
 import { parse as cookieParse, write as cookieWrite } from './tool/cookie'
-import { jsonResponse, humanityJson } from './tool/enhancers'
+import { jsonResponse, humanityJson, content, jsonContent } from './tool/enhancers'
 
 import handlers from './handlers/'
 
@@ -19,6 +19,8 @@ export default logger => config => async fs => {
       humanityJson: humanityJson(x)
     }),
     request: x => ({
+      content: content(x),
+      jsonContent: jsonContent(x),
       cookie: cookieParse(x)
     })
   })

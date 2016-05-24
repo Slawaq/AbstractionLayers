@@ -1,6 +1,6 @@
 'use strict'
 
-import person from './person'
+import { get as getPerson, edit as editPerson, update as updatePerson } from './person'
 
 let index = (req, res) => {
   res.cookie({ strawberry: 'cookie!' })
@@ -13,5 +13,7 @@ let index = (req, res) => {
 export default logger => config => fs => router => {
   router
     .get('/', index)
-    .get('/person', person(logger)(config)(fs))
+    .get('/person/edit', editPerson(logger)(config)(fs))
+    .get('/person', getPerson(logger)(config)(fs))
+    .post('/person', updatePerson(logger)(config)(fs))
 }

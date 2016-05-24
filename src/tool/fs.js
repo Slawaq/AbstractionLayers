@@ -29,27 +29,32 @@ export default class FileSystem {
         : resolve(data)))
   }
 
-  getCached(name) {
+  getCached (name) {
     return this.cache.hasOwnProperty(name)
       ? Promise.resolve(this.cache[name])
       : Promise.reject()
   }
 
-  lazyUpdate (name, data) {
+  update (name, data) {
     let cacheUpdater = _ => this.cache[name] = data
 
     return this
       .getCached(name)
       .then(cacheUpdater, cacheUpdater)
-      .then(_ => this.update(name, data))
+      .then(_ => this.updateOnDisk(name, data))
   }
 
-  update (name, data) {
+  updateJSON (name, json) {
+    let data = JSON.stringify(json, null, 2)
+    return this.update(name, data)
+  }
+
+  updateOnDisk (name, data) {
     return new Promise(
       (resolve, reject) => fs.writeFile(name, data, err =>
         err
         ? reject(err)
-        : resolve()))
+        : resolve(data)))
   }
 
   clear (name) {
