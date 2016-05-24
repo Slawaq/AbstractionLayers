@@ -1,3 +1,11 @@
+## What've I done?
+
+You must run this commands: `npm run build`, `npm run main` and check the page: `localhost:3333` at browser.
+
+Also if you want to code something, run `npm run build:watch`, `npm run main:watch` in background (Don't forget about nodemon:))
+
+-------
+
 ## Описание
 
 Цель: научиться разделять слои абстракций и декомпозировать смешанный код.

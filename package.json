@@ -1,0 +1,54 @@
+{
+  "name": "abstraction.layers",
+  "version": "1.0.0",
+  "description": "Цель: научиться разделять слои абстракций и декомпозировать смешанный код.",
+  "main": "index.js",
+  "config": {
+    "port": 3333,
+    "state": {
+      "person": "./person.json"
+    },
+    "templatePath": "templates/",
+    "templates": {
+      "index": "index.jhtml",
+      "500": "server.500.jhtml",
+      "404": "server.404.jhtml"
+    }
+  },
+  "scripts": {
+    "build:index": "./node_modules/.bin/babel ./index.js -o ./compiled/index.js",
+    "build:src": "./node_modules/.bin/babel -d ./compiled/src/ ./src",
+    "build": "npm run build:src && npm run build:index",
+    "build:watch": "parallelshell \"npm run build:src -- --watch\"  \"npm run build:index -- --watch\"",
+    "start": "node ./compiled/index.js",
+    "start:watch": "nodemon ./compiled/index.js -w compiled"
+  },
+  "devDependencies": {
+    "babel-cli": "*",
+    "babel-eslint": "*",
+    "babel-preset-es2015": "*",
+    "babel-preset-stage-0": "*",
+    "babel-plugin-transform-runtime": "*",
+    "eslint": "*",
+    "eslint-config-standard": "*",
+    "eslint-plugin-promise": "*",
+    "eslint-plugin-standard": "*",
+    "parallelshell": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Slawaq/AbstractionLayers.git"
+  },
+  "keywords": [
+    "refactoring"
+  ],
+  "author": "slawaq",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Slawaq/AbstractionLayers/issues"
+  },
+  "homepage": "https://github.com/Slawaq/AbstractionLayers#readme",
+  "dependencies": {
+    "winston": "^2.2.0"
+  }
+}

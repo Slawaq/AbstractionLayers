@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Application</title>
+</head>
+<body>
+<h1>Welcome</h1>
+Your IP: @ip
+<pre>@cookies</pre>
+</body>
+</html>
