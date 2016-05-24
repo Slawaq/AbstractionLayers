@@ -15,6 +15,12 @@ export default class FileSystem {
       .then(data => this.cache[name] = data)
   }
 
+  getJSON (name) {
+    return this
+      .get(name)
+      .then(::JSON.parse)
+  }
+
   getForce (name) {
     return new Promise(
       (resolve, reject) => fs.readFile(name, (err, data) =>

@@ -3,6 +3,7 @@
 import Router from './tool/router'
 import Templater from './tool/templater'
 import { parse as cookieParse, write as cookieWrite } from './tool/cookie'
+import { jsonResponse, humanityJson } from './tool/enhancers'
 
 import handlers from './handlers/'
 
@@ -13,7 +14,9 @@ export default logger => config => async fs => {
   let router = new Router(logger, {
     response: x => ({ 
       template: templater.enhanceHttpResponse(x),
-      cookie: cookieWrite(x)
+      cookie: cookieWrite(x),
+      json: jsonResponse(x),
+      humanityJson: humanityJson(x)
     }),
     request: x => ({
       cookie: cookieParse(x)
